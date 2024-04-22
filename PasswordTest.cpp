@@ -101,3 +101,39 @@ TEST(PasswordTest, spaces)
 	bool actual = my_password.has_mixed_case("   Zz");
 	ASSERT_EQ(true, actual);
 }
+
+// Tests for set/authenticate functions
+
+TEST(PasswordTest, set_password)
+{
+	Password my_password;
+	my_password.set("Zz123456");
+	bool actual = my_password.authenticate("Zz123456");
+	ASSERT_EQ(true, actual);
+}
+
+TEST(PasswordTest, set_password_fail)
+{
+	Password my_password;
+	my_password.set("Zz123456");
+	bool actual = my_password.authenticate("Zz1234567");
+	ASSERT_EQ(false, actual);
+}
+
+//if the password has already been used
+TEST(PasswordTest, set_password_used)
+{
+	Password my_password;
+	my_password.set("Zz123456");
+	my_password.set("Zz123456");
+	bool actual = my_password.authenticate("Zz123456");
+	ASSERT_EQ(false, actual);
+}
+
+//if pass_history is empty
+TEST(PasswordTest, pass_history_empty_set)
+{
+	Password my_password;
+	bool actual = my_password.authenticate("Zz123456");
+	ASSERT_EQ(false, actual);
+}

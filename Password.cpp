@@ -55,7 +55,7 @@ Password::Password(){
     2. It has no more than 3 of the same leading characters
     3. It has mixed case (at least one upper case and at least one lower case)
     4. It was not a previous password in the history
-  */
+*/
 void Password::set(string new_pass){
 
   if ((new_pass.length() >= 8 && new_pass.length() <= 20) && count_leading_characters(new_pass) <= 3 && has_mixed_case(new_pass)){
@@ -75,8 +75,11 @@ void Password::set(string new_pass){
   receives a string and authenticates it against the latest password in the
   pass_history, returning true for an exact match or false when it does not match
   or if a password has not been set.
-  */
+*/
 bool Password::authenticate(string pass){
+  if (pass_history.size() > 0){
+    return pass == pass_history.back();
+  }
   return false;
 }
 
