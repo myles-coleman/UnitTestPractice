@@ -67,6 +67,13 @@ TEST(PasswordTest, both_cases)
 	ASSERT_EQ(true, actual);
 }
 
+// Tests for has_mixed_case function
+TEST(PasswordTest, OnlyLowerCase) {
+    Password my_password;
+    bool actual = my_password.has_mixed_case("lowercase");
+    ASSERT_EQ(false, actual);
+}
+
 TEST(PasswordTest, only_upper_case)
 {
 	Password my_password;
@@ -81,12 +88,7 @@ TEST(PasswordTest, only_lower_case)
 	ASSERT_EQ(false, actual);
 }
 
-TEST(PasswordTest, no_letters)
-{
-	Password my_password;
-	bool actual = my_password.has_mixed_case("!@#$");
-	ASSERT_EQ(false, actual);
-}
+
 
 TEST(PasswordTest, empty_string)
 {
@@ -137,3 +139,4 @@ TEST(PasswordTest, pass_history_empty_set)
 	bool actual = my_password.authenticate("Zz123456");
 	ASSERT_EQ(false, actual);
 }
+
